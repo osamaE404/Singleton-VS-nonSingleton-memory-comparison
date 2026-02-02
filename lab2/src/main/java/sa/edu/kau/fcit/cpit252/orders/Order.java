@@ -8,23 +8,17 @@ import java.time.LocalDate;
 public class Order {
     private int orderNumber;
     private LocalDate orderDate;
-    private Logger log = Logger.getLoggerInstance();
+    private Logger log;
     private int getRandomNumber(){
         Random ran = new Random();
         return ran.nextInt(Integer.MAX_VALUE);
     }
     public Order(){
-        // Emulate slow initialization.
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
+        this(Logger.getLoggerInstance());
+    }
+    public Order(Logger logger){
+        this.log = logger;
+
         this.orderNumber = getRandomNumber();
         this.orderDate = LocalDate.now();
         log.info("A new order was created");

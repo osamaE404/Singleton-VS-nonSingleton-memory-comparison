@@ -9,7 +9,7 @@ public class Shipment {
     private String name;
     private String address;
     private String phoneNumber;
-    private Logger log = Logger.getLoggerInstance();;
+    private Logger log;
 
     private int getRandomNumber() {
         Random ran = new Random();
@@ -17,12 +17,11 @@ public class Shipment {
     }
 
     public Shipment(String name, String address, String phoneNumber) {
-        // Emulate slow initialization.
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
+        this(name, address, phoneNumber, Logger.getLoggerInstance());
+    }
+
+    public Shipment(String name, String address, String phoneNumber, Logger logger) {
+        this.log = logger;
 
         this.trackingNumber = getRandomNumber();
         this.name = name;
